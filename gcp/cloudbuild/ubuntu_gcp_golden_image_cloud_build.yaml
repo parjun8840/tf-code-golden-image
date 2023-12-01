@@ -1,0 +1,9 @@
+#us-central1-docker.pkg.dev/your-project-name-here/your-artifact-registry-name-here/container-name:myTag
+steps:
+  - name: '$REGION-docker.pkg.dev/$PROJECT_NAME/$REGISTRY_NAME/$CONTAINER_NAME:$TAG'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      /usr/bin/packer init gcp/packer-ubuntu-add-disk-golden-image
+      /usr/bin/packer build gcp/packer-ubuntu-add-disk-golden-image
