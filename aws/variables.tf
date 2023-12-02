@@ -36,7 +36,7 @@ variable "enabled_rules" {
   default = ["cve","cis","nr","sbp"]
 }
 
-variable "hidcversions" {
+variable "hidsversions" {
   type        = string
-  default = "hidcversions-versions-arm64.deb"
+  default = "hidsversions-versions-arm64.deb"
 }

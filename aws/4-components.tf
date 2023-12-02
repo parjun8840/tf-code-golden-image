@@ -28,8 +28,8 @@ resource "aws_imagebuilder_component" "devops-build" {
       })
 }
 
-resource "aws_imagebuilder_component" "devops-hidc" {
-  name       = "${var.image_name_tag}-hidc"
+resource "aws_imagebuilder_component" "devops-hids" {
+  name       = "${var.image_name_tag}-hids"
   platform   = "Linux"
   version    = "1.0.3"
   #uri        = "s3://${var.aws_s3_bucket}/files/ubuntu-hids-agent-linux.yml"
@@ -40,8 +40,8 @@ resource "aws_imagebuilder_component" "devops-hidc" {
         name = "S3Download"
         action = "S3Download"
         inputs = [{
-          destination = "/tmp/{{ hidcversions }}",
-          source = "s3://ami-pipeline-devops-ami-pipeline/binaries/{{ hidcversions }}"
+          destination = "/tmp/{{ hidsversions }}",
+          source = "s3://ami-pipeline-devops-ami-pipeline/binaries/{{ hidsversions }}"
         }]},
         {
         action = "ExecuteBash"
@@ -49,7 +49,7 @@ resource "aws_imagebuilder_component" "devops-hidc" {
         onFailure = "Continue"
         inputs = {
           commands = [
-            "dpkg -i /tmp/{{ hidcversions }}"
+            "dpkg -i /tmp/{{ hidsversions }}"
           ]
         }
       }
@@ -57,7 +57,7 @@ resource "aws_imagebuilder_component" "devops-hidc" {
     }]
     schemaVersion = 1.0
     parameters = [{
-    hidcversions = {
+    hidsversions = {
     type = "string"
     description = "HIDC Agent version to install"
     }}]
